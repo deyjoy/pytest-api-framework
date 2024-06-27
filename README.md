@@ -27,6 +27,7 @@ project_root/
 │   ├── utils/
 │   │   ├── __init__.py
 │   │   ├── helpers.py
+│   │   ├── logging_config.py
 │
 ├── .github/
 │   ├── workflows/
