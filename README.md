@@ -41,38 +41,38 @@ project_root/
 
 ## Setup Instructions
 
-###Clone the Repository:
+### Clone the Repository:
 ```commandline
 git clone <repository-url>
 cd project_root
 ```
 
-###Set Up Virtual Environment:
+### Set Up Virtual Environment:
 ```commandline
 python -m venv venv
 source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 ```
 
-###Install Dependencies:
+### Install Dependencies:
 ```commandline
 pip install -r requirements.txt
 
 ```
-###Run the Setup Script:
+### Run the Setup Script:
 If you haven't already set up the folder structure, you can run the provided script:
 ```commandline
 python setup_structure.py
 
 ```
-###Configure Environment Variables:
+### Configure Environment Variables:
 Create a .env file in the root directory and add any necessary environment variables.
 
-###Running Tests
+### Running Tests
 ```commandline
 pytest
 ```
 
-###CI Integration
+### CI Integration
 This project uses GitHub Actions for Continuous Integration. The configuration file is located at .github/workflows/ci.yml.
 You can replace `<repository-url>` with the actual URL of your repository.
 
