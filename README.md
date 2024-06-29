@@ -4,6 +4,15 @@ This project demonstrates API testing using Pytest in Python. The tests are writ
 
 ## Folder Structure
 
+The project follows a structured design pattern to ensure maintainability and reusability. The key components include:
+
+- **api/**: Contains the API client code to interact with the JSONPlaceholder API.
+- **config/**: Configuration files for environment settings.
+- **data/**: Test data files for data-driven testing.
+- **services/**: Service classes encapsulating the business logic and interactions with the API endpoints.
+- **tests/**: Test cases organized by API endpoints.
+- **utils/**: Utility functions and helper methods.
+
 ```plaintext
 project_root/
 │
@@ -15,6 +24,17 @@ project_root/
 │   ├── config/
 │   │   ├── __init__.py
 │   │   ├── settings.py
+│   ├── data/
+│   │   ├── test_data.json
+│   ├── services/
+│   │   ├── __init__.py
+│   │   ├── post_service.py
+│   │   ├── comment_service.py
+│   │   ├── user_service.py
+│   │   ├── album_service.py
+│   │   ├── photo_service.py
+│   │   ├── todo_service.py
+│   │   ├── api_factory.py
 │   ├── tests/
 │   │   ├── __init__.py
 │   │   ├── test_endpoints.py
@@ -27,7 +47,6 @@ project_root/
 │   ├── utils/
 │   │   ├── __init__.py
 │   │   ├── helpers.py
-│   │   ├── logging_config.py
 │
 ├── .github/
 │   ├── workflows/
@@ -39,6 +58,17 @@ project_root/
 ├── requirements.txt
 └── pytest.ini
 ```
+
+## Design Patterns
+
+### Service Layer Pattern: 
+Each service class in the services/ directory encapsulates the business logic and interactions with the API endpoints, promoting modularity and reusability.
+
+###Data-Driven Testing: 
+Test data is managed in the data/ directory, allowing for flexible and scalable test cases.
+
+###Utility Functions: 
+Common helper methods are placed in the utils/ directory to keep the codebase DRY (Don't Repeat Yourself).
 
 ## Setup Instructions
 
