@@ -64,10 +64,10 @@ project_root/
 ### Service Layer Pattern: 
 Each service class in the services/ directory encapsulates the business logic and interactions with the API endpoints, promoting modularity and reusability.
 
-###Data-Driven Testing: 
+### Data-Driven Testing: 
 Test data is managed in the data/ directory, allowing for flexible and scalable test cases.
 
-###Utility Functions: 
+### Utility Functions: 
 Common helper methods are placed in the utils/ directory to keep the codebase DRY (Don't Repeat Yourself).
 
 ## Setup Instructions
