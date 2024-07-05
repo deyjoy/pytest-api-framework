@@ -1,6 +1,6 @@
 import pytest
 from src.services.post_service import PostService
-from src.utils.logging_config import configure_logging, get_logger
+from src.config.logging_config import configure_logging, get_logger
 
 # Configure logging
 configure_logging()
