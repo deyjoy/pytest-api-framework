@@ -1,6 +1,6 @@
 import pytest
 from src.services.comment_service import CommentService
-from src.utils.logging_config import configure_logging, get_logger
+from src.config.logging_config import configure_logging, get_logger
 from datetime import datetime
 
 # Configure logging with a unique log file for this test run

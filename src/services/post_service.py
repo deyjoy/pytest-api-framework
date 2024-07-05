@@ -1,5 +1,5 @@
 from src.api.clients import APIClient
-from src.utils.logging_config import configure_logging, get_logger
+from src.config.logging_config import configure_logging, get_logger
 
 # Configure logging
 configure_logging()

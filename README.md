@@ -8,7 +8,6 @@ The project follows a structured design pattern to ensure maintainability and re
 
 - **api/**: Contains the API client code to interact with the JSONPlaceholder API.
 - **config/**: Configuration files for environment settings.
-- **data/**: Test data files for data-driven testing.
 - **services/**: Service classes encapsulating the business logic and interactions with the API endpoints.
 - **tests/**: Test cases organized by API endpoints.
 - **utils/**: Utility functions and helper methods.
@@ -23,9 +22,7 @@ project_root/
 │   │   ├── clients.py
 │   ├── config/
 │   │   ├── __init__.py
-│   │   ├── settings.py
-│   ├── data/
-│   │   ├── test_data.json
+│   │   ├── logging_config.py
 │   ├── services/
 │   │   ├── __init__.py
 │   │   ├── post_service.py
@@ -34,10 +31,8 @@ project_root/
 │   │   ├── album_service.py
 │   │   ├── photo_service.py
 │   │   ├── todo_service.py
-│   │   ├── api_factory.py
 │   ├── tests/
 │   │   ├── __init__.py
-│   │   ├── test_endpoints.py
 │   │   ├── test_posts.py
 │   │   ├── test_comments.py
 │   │   ├── test_users.py
@@ -57,6 +52,8 @@ project_root/
 ├── README.md
 ├── requirements.txt
 └── pytest.ini
+
+
 ```
 
 ## Design Patterns
@@ -64,8 +61,6 @@ project_root/
 ### Service Layer Pattern: 
 Each service class in the services/ directory encapsulates the business logic and interactions with the API endpoints, promoting modularity and reusability.
 
-### Data-Driven Testing: 
-Test data is managed in the data/ directory, allowing for flexible and scalable test cases.
 
 ### Utility Functions: 
 Common helper methods are placed in the utils/ directory to keep the codebase DRY (Don't Repeat Yourself).
