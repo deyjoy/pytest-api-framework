@@ -1,7 +1,6 @@
 import logging
 import os
 from datetime import datetime
-from functools import wraps
 
 
 def configure_logging(log_file=None):
@@ -45,25 +44,3 @@ def configure_logging(log_file=None):
 def get_logger(name):
     """Get a logger with the given name."""
     return logging.getLogger(name)
-
-
-def log_with_file(file_name):
-    """Decorator to configure logging for the duration of a method call."""
-
-    def decorator(func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            configure_logging(file_name)
-            logger = get_logger(__name__)
-            logger.info(f"Starting method {func.__name__}")
-            try:
-                result = func(*args, **kwargs)
-                logger.info(f"Finished method {func.__name__}")
-                return result
-            except Exception as e:
-                logger.error(f"An error occurred in method {func.__name__}: {e}")
-                raise
-
-        return wrapper
-
-    return decorator

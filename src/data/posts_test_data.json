@@ -1,0 +1,24 @@
+{
+    "get_post_by_id": {
+        "post_id": 1
+    },
+    "create_post": {
+        "new_post": {
+            "title": "foo",
+            "body": "bar",
+            "userId": 1
+        }
+    },
+    "update_post": {
+        "post_id": 1,
+        "updated_post": {
+            "id": 1,
+            "title": "updated title",
+            "body": "updated body",
+            "userId": 1
+        }
+    },
+    "delete_post": {
+        "post_id": 1
+    }
+}

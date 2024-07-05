@@ -1,0 +1,24 @@
+{
+    "get_todo_by_id": {
+        "todo_id": 1
+    },
+    "create_todo": {
+        "new_todo": {
+            "title": "foo",
+            "completed": "False",
+            "userId": 1
+        }
+    },
+    "update_todo": {
+        "todo_id": 1,
+        "updated_todo": {
+            "id": 1,
+            "title": "updated title",
+            "completed": "True",
+            "userId": 1
+        }
+    },
+    "delete_todo": {
+        "todo_id": 1
+    }
+}
