@@ -1,0 +1,22 @@
+{
+    "get_album_by_id": {
+        "album_id": 1
+    },
+    "create_album": {
+        "new_album": {
+            "title": "foo",
+            "userId": 1
+        }
+    },
+    "update_album": {
+        "album_id": 1,
+        "updated_album": {
+            "id": 1,
+            "title": "updated title",
+            "userId": 1
+        }
+    },
+    "delete_album": {
+        "album_id": 1
+    }
+}

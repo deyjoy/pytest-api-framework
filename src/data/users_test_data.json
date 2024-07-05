@@ -1,0 +1,24 @@
+{
+    "get_user_by_id": {
+        "user_id": 1
+    },
+    "create_user": {
+        "new_user": {
+            "name": "foo",
+            "username": "bar",
+            "email": "foo@bar.com"
+        }
+    },
+    "update_user": {
+        "user_id": 1,
+        "updated_user": {
+            "id": 1,
+            "name": "updated name",
+            "username": "updated username",
+            "email": "updated@bar.com"
+        }
+    },
+    "delete_user": {
+        "user_id": 1
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "get_comment_by_id": {
+        "comment_id": 1
+    },
+    "create_comment": {
+        "new_comment": {
+            "name": "foo",
+            "body": "bar",
+            "postId": 1,
+            "email": "foo@bar.com"
+        }
+    },
+    "update_comment": {
+        "comment_id": 1,
+        "updated_comment": {
+            "id": 1,
+            "name": "updated name",
+            "body": "updated body",
+            "postId": 1,
+            "email": "updated@bar.com"
+        }
+    },
+    "delete_comment": {
+        "comment_id": 1
+    }
+}
