@@ -1,0 +1,26 @@
+{
+    "get_photo_by_id": {
+        "photo_id": 1
+    },
+    "create_photo": {
+        "new_photo": {
+            "title": "foo",
+            "url": "http://example.com/foo.jpg",
+            "thumbnailUrl": "http://example.com/foo_thumb.jpg",
+            "albumId": 1
+        }
+    },
+    "update_photo": {
+        "photo_id": 1,
+        "updated_photo": {
+            "id": 1,
+            "title": "updated title",
+            "url": "http://example.com/updated.jpg",
+            "thumbnailUrl": "http://example.com/updated_thumb.jpg",
+            "albumId": 1
+        }
+    },
+    "delete_photo": {
+        "photo_id": 1
+    }
+}

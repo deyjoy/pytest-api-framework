@@ -1,4 +1,6 @@
 import pytest
+import json
+import os
 from src.services.album_service import AlbumService
 from src.config.logging_config import configure_logging, get_logger
 from datetime import datetime
@@ -23,6 +25,10 @@ class TestAlbumsAPI:
         """
         cls.album_service = AlbumService()
         logger.info("Initialized AlbumService for test class.")
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        data_file = os.path.join(base_dir, '../data/albums_test_data.json')
+        with open(data_file) as f:
+            cls.test_data = json.load(f)
 
     def setup_method(self):
         """
@@ -52,7 +58,7 @@ class TestAlbumsAPI:
         """
         Test to get an album by ID and verify the response.
         """
-        album_id = 1
+        album_id = self.test_data["get_album_by_id"]["album_id"]
         try:
             response = self.album_service.fetch_album_by_id(album_id)
             assert response['id'] == album_id
@@ -65,10 +71,7 @@ class TestAlbumsAPI:
         """
         Test to create a new album and verify the response.
         """
-        new_album = {
-            'title': 'foo',
-            'userId': 1
-        }
+        new_album = self.test_data["create_album"]["new_album"]
         try:
             response = self.album_service.create_album(new_album)
             assert response['title'] == new_album['title']
@@ -81,12 +84,8 @@ class TestAlbumsAPI:
         """
         Test to update an album and verify the response.
         """
-        album_id = 1
-        updated_album = {
-            'id': album_id,
-            'title': 'updated title',
-            'userId': 1
-        }
+        album_id = self.test_data["update_album"]["album_id"]
+        updated_album = self.test_data["update_album"]["updated_album"]
         try:
             response = self.album_service.update_album(album_id, updated_album)
             assert response['title'] == updated_album['title']
@@ -99,7 +98,7 @@ class TestAlbumsAPI:
         """
         Test to delete an album and verify the response.
         """
-        album_id = 1
+        album_id = self.test_data["delete_album"]["album_id"]
         try:
             response = self.album_service.delete_album(album_id)
             assert response == 200

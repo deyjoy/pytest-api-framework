@@ -1,4 +1,6 @@
 import pytest
+import json
+import os
 from src.services.photo_service import PhotoService
 from src.config.logging_config import configure_logging, get_logger
 from datetime import datetime
@@ -23,6 +25,10 @@ class TestPhotosAPI:
         """
         cls.photo_service = PhotoService()
         logger.info("Initialized PhotoService for test class.")
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        data_file = os.path.join(base_dir, '../data/photos_test_data.json')
+        with open(data_file) as f:
+            cls.test_data = json.load(f)
 
     def setup_method(self):
         """
@@ -52,7 +58,7 @@ class TestPhotosAPI:
         """
         Test to get a photo by ID and verify the response.
         """
-        photo_id = 1
+        photo_id = self.test_data["get_photo_by_id"]["photo_id"]
         try:
             response = self.photo_service.fetch_photo_by_id(photo_id)
             assert response['id'] == photo_id
@@ -65,12 +71,7 @@ class TestPhotosAPI:
         """
         Test to create a new photo and verify the response.
         """
-        new_photo = {
-            'title': 'foo',
-            'url': 'http://example.com/foo.jpg',
-            'thumbnailUrl': 'http://example.com/foo_thumb.jpg',
-            'albumId': 1
-        }
+        new_photo = self.test_data["create_photo"]["new_photo"]
         try:
             response = self.photo_service.create_photo(new_photo)
             assert response['title'] == new_photo['title']
@@ -83,14 +84,8 @@ class TestPhotosAPI:
         """
         Test to update a photo and verify the response.
         """
-        photo_id = 1
-        updated_photo = {
-            'id': photo_id,
-            'title': 'updated title',
-            'url': 'http://example.com/updated.jpg',
-            'thumbnailUrl': 'http://example.com/updated_thumb.jpg',
-            'albumId': 1
-        }
+        photo_id = self.test_data["update_photo"]["photo_id"]
+        updated_photo = self.test_data["update_photo"]["updated_photo"]
         try:
             response = self.photo_service.update_photo(photo_id, updated_photo)
             assert response['title'] == updated_photo['title']
@@ -103,7 +98,7 @@ class TestPhotosAPI:
         """
         Test to delete a photo and verify the response.
         """
-        photo_id = 1
+        photo_id = self.test_data["delete_photo"]["photo_id"]
         try:
             response = self.photo_service.delete_photo(photo_id)
             assert response == 200

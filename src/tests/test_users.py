@@ -1,4 +1,6 @@
 import pytest
+import json
+import os
 from src.services.user_service import UserService
 from src.config.logging_config import configure_logging, get_logger
 from datetime import datetime
@@ -23,6 +25,10 @@ class TestUsersAPI:
         """
         cls.user_service = UserService()
         logger.info("Initialized UserService for test class.")
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        data_file = os.path.join(base_dir, '../data/users_test_data.json')
+        with open(data_file) as f:
+            cls.test_data = json.load(f)
 
     def setup_method(self):
         """
@@ -52,7 +58,7 @@ class TestUsersAPI:
         """
         Test to get a user by ID and verify the response.
         """
-        user_id = 1
+        user_id = self.test_data["get_user_by_id"]["user_id"]
         try:
             response = self.user_service.fetch_user_by_id(user_id)
             assert response['id'] == user_id
@@ -65,11 +71,7 @@ class TestUsersAPI:
         """
         Test to create a new user and verify the response.
         """
-        new_user = {
-            'name': 'foo',
-            'username': 'bar',
-            'email': 'foo@bar.com'
-        }
+        new_user = self.test_data["create_user"]["new_user"]
         try:
             response = self.user_service.create_user(new_user)
             assert response['name'] == new_user['name']
@@ -82,13 +84,8 @@ class TestUsersAPI:
         """
         Test to update a user and verify the response.
         """
-        user_id = 1
-        updated_user = {
-            'id': user_id,
-            'name': 'updated name',
-            'username': 'updated username',
-            'email': 'updated@bar.com'
-        }
+        user_id = self.test_data["update_user"]["user_id"]
+        updated_user = self.test_data["update_user"]["updated_user"]
         try:
             response = self.user_service.update_user(user_id, updated_user)
             assert response['name'] == updated_user['name']
@@ -101,7 +98,7 @@ class TestUsersAPI:
         """
         Test to delete a user and verify the response.
         """
-        user_id = 1
+        user_id = self.test_data["delete_user"]["user_id"]
         try:
             response = self.user_service.delete_user(user_id)
             assert response == 200

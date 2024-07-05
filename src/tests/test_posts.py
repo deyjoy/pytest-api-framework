@@ -1,4 +1,6 @@
 import pytest
+import json
+import os
 from src.services.post_service import PostService
 from src.config.logging_config import configure_logging, get_logger
 
@@ -21,6 +23,10 @@ class TestPostsAPI:
         """
         cls.post_service = PostService()
         logger.info("Initialized PostService for test class.")
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        data_file = os.path.join(base_dir, '../data/posts_test_data.json')
+        with open(data_file) as f:
+            cls.test_data = json.load(f)
 
     def setup_method(self):
         """
@@ -50,7 +56,7 @@ class TestPostsAPI:
         """
         Test to get a post by ID and verify the response.
         """
-        post_id = 1
+        post_id = self.test_data["get_post_by_id"]["post_id"]
         try:
             response = self.post_service.fetch_post_by_id(post_id)
             assert response['id'] == post_id
@@ -63,11 +69,7 @@ class TestPostsAPI:
         """
         Test to create a new post and verify the response.
         """
-        new_post = {
-            'title': 'foo',
-            'body': 'bar',
-            'userId': 1
-        }
+        new_post = self.test_data["create_post"]["new_post"]
         try:
             response = self.post_service.create_post(new_post)
             assert response['title'] == new_post['title']
@@ -80,13 +82,8 @@ class TestPostsAPI:
         """
         Test to update a post and verify the response.
         """
-        post_id = 1
-        updated_post = {
-            'id': post_id,
-            'title': 'updated title',
-            'body': 'updated body',
-            'userId': 1
-        }
+        post_id = self.test_data["update_post"]["post_id"]
+        updated_post = self.test_data["update_post"]["updated_post"]
         try:
             response = self.post_service.update_post(post_id, updated_post)
             assert response['title'] == updated_post['title']
@@ -99,7 +96,7 @@ class TestPostsAPI:
         """
         Test to delete a post and verify the response.
         """
-        post_id = 1
+        post_id = self.test_data["delete_post"]["post_id"]
         try:
             response = self.post_service.delete_post(post_id)
             assert response == 200

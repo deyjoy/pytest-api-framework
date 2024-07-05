@@ -1,4 +1,6 @@
 import pytest
+import json
+import os
 from src.services.comment_service import CommentService
 from src.config.logging_config import configure_logging, get_logger
 from datetime import datetime
@@ -23,6 +25,10 @@ class TestCommentsAPI:
         """
         cls.comment_service = CommentService()
         logger.info("Initialized CommentService for test class.")
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        data_file = os.path.join(base_dir, '../data/comments_test_data.json')
+        with open(data_file) as f:
+            cls.test_data = json.load(f)
 
     def setup_method(self):
         """
@@ -52,7 +58,7 @@ class TestCommentsAPI:
         """
         Test to get a comment by ID and verify the response.
         """
-        comment_id = 1
+        comment_id = self.test_data["get_comment_by_id"]["comment_id"]
         try:
             response = self.comment_service.fetch_comment_by_id(comment_id)
             assert response['id'] == comment_id
@@ -65,12 +71,7 @@ class TestCommentsAPI:
         """
         Test to create a new comment and verify the response.
         """
-        new_comment = {
-            'name': 'foo',
-            'body': 'bar',
-            'postId': 1,
-            'email': 'foo@bar.com'
-        }
+        new_comment = self.test_data["create_comment"]["new_comment"]
         try:
             response = self.comment_service.create_comment(new_comment)
             assert response['name'] == new_comment['name']
@@ -83,14 +84,8 @@ class TestCommentsAPI:
         """
         Test to update a comment and verify the response.
         """
-        comment_id = 1
-        updated_comment = {
-            'id': comment_id,
-            'name': 'updated name',
-            'body': 'updated body',
-            'postId': 1,
-            'email': 'updated@bar.com'
-        }
+        comment_id = self.test_data["update_comment"]["comment_id"]
+        updated_comment = self.test_data["update_comment"]["updated_comment"]
         try:
             response = self.comment_service.update_comment(comment_id, updated_comment)
             assert response['name'] == updated_comment['name']
@@ -103,7 +98,7 @@ class TestCommentsAPI:
         """
         Test to delete a comment and verify the response.
         """
-        comment_id = 1
+        comment_id = self.test_data["delete_comment"]["comment_id"]
         try:
             response = self.comment_service.delete_comment(comment_id)
             assert response == 200

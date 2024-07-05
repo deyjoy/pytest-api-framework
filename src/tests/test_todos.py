@@ -1,4 +1,6 @@
 import pytest
+import json
+import os
 from src.services.todo_service import TodoService
 from src.config.logging_config import configure_logging, get_logger
 from datetime import datetime
@@ -23,6 +25,10 @@ class TestTodosAPI:
         """
         cls.todo_service = TodoService()
         logger.info("Initialized TodoService for test class.")
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        data_file = os.path.join(base_dir, '../data/todos_test_data.json')
+        with open(data_file) as f:
+            cls.test_data = json.load(f)
 
     def setup_method(self):
         """
@@ -52,7 +58,7 @@ class TestTodosAPI:
         """
         Test to get a todo by ID and verify the response.
         """
-        todo_id = 1
+        todo_id = self.test_data["get_todo_by_id"]["todo_id"]
         try:
             response = self.todo_service.fetch_todo_by_id(todo_id)
             assert response['id'] == todo_id
@@ -65,11 +71,7 @@ class TestTodosAPI:
         """
         Test to create a new todo and verify the response.
         """
-        new_todo = {
-            'title': 'foo',
-            'completed': False,
-            'userId': 1
-        }
+        new_todo = self.test_data["create_todo"]["new_todo"]
         try:
             response = self.todo_service.create_todo(new_todo)
             assert response['title'] == new_todo['title']
@@ -82,13 +84,8 @@ class TestTodosAPI:
         """
         Test to update a todo and verify the response.
         """
-        todo_id = 1
-        updated_todo = {
-            'id': todo_id,
-            'title': 'updated title',
-            'completed': True,
-            'userId': 1
-        }
+        todo_id = self.test_data["update_todo"]["todo_id"]
+        updated_todo = self.test_data["update_todo"]["updated_todo"]
         try:
             response = self.todo_service.update_todo(todo_id, updated_todo)
             assert response['title'] == updated_todo['title']
@@ -101,7 +98,7 @@ class TestTodosAPI:
         """
         Test to delete a todo and verify the response.
         """
-        todo_id = 1
+        todo_id = self.test_data["delete_todo"]["todo_id"]
         try:
             response = self.todo_service.delete_todo(todo_id)
             assert response == 200
